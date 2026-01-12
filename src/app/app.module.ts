@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MyTetrisComponent } from './my-tetris/my-tetris.component';
 import { GamesComponent } from './games/games.component';
 import { ShowcasesComponent } from './showcases/showcases.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ShowcasesComponent } from './showcases/showcases.component';
     HomeComponent,
     MyTetrisComponent,
     GamesComponent,
-    ShowcasesComponent
+    ShowcasesComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

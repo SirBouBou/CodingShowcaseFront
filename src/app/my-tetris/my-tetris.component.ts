@@ -34,7 +34,7 @@ export class MyTetrisComponent {
   sketch(s:p5) { 
     const pieces:number[][][] = [[[0,0], [0,1], [1,0], [1,1]]];
     const width = 400;
-    const height = 600;
+    const height = 400;
     const pixelSize = 20;
     let grid: any[] = [];
     let nextGrid: any[] = [];
@@ -82,10 +82,11 @@ export class MyTetrisComponent {
     }
 
     function createPiece() {
+      console.log("new piece")
       if(fallingPiece.length == 0) {
         let i = cols/2-1;
         let j = 0
-        let piece = randomNumber(0, pieces.length);
+        let piece = 0//randomNumber(0, pieces.length);
         let coords = pieces[piece];
         fallingPiece = []
         for(let size of coords) {
@@ -93,6 +94,38 @@ export class MyTetrisComponent {
           fallingPiece.push([i+size[0], j+size[1]]);
         }
       }
+    }
+
+    function leftParts(piece: number[][]) {
+      let val = cols
+      let res = []
+      for(let coord of piece) {
+        if(coord[0] < val) {
+          val = coord[0]
+        }
+      }
+      for(let coord of piece) {
+        if(coord[0] === val) {
+          res.push(coord)
+        }
+      }
+      return res
+    }
+
+    function lowestParts(piece: number[][]) {
+      let val = 0
+      let res = []
+      for(let coord of piece) {
+        if(coord[1] > val) {
+          val = coord[1]
+        }
+      }
+      for(let coord of piece) {
+        if(coord[1] === val) {
+          res.push(coord)
+        }
+      }
+      return res
     }
 
     function deepCopy () {
@@ -104,21 +137,26 @@ export class MyTetrisComponent {
 
     function moveDown() {
       deepCopy();
-      for (let coord of fallingPiece) {
-        nextGrid[coord[0]][coord[1]] = 0;
-      }
-      for (let coord of fallingPiece) {
-        if(nextGrid[coord[0]][coord[1]+1] === 0) {
-          nextGrid[coord[0]][coord[1]+1] = grid[coord[0]][coord[1]];
-          coord[1] += 1;
-        } else {
+      let coords = lowestParts(fallingPiece)
+      for(let coord of coords) {
+        if(!stillInRows(coord[1]+1) || nextGrid[coord[0]][coord[1]+1] !== 0) {
+          console.log("end piece")
           fallingPiece = []
-          deepCopy()
           createPiece();
-          break;
+          break
         }
       }
-      grid = nextGrid;
+
+      if(fallingPiece.length != 0) {
+        for (let coord of fallingPiece) {
+          nextGrid[coord[0]][coord[1]] = 0;
+        }
+        for (let coord of fallingPiece) {
+          nextGrid[coord[0]][coord[1]+1] = grid[coord[0]][coord[1]];
+          coord[1] += 1;
+        }
+        grid = nextGrid;
+      }     
     }
 
     function moveLeft() {
@@ -181,7 +219,7 @@ export class MyTetrisComponent {
             let y = j * pixelSize;
             s.square(x, y, pixelSize);
           } else {
-            s.fill('black');
+            s.fill('white');
             let x = i * pixelSize;
             let y = j * pixelSize;
             s.square(x, y, pixelSize);
