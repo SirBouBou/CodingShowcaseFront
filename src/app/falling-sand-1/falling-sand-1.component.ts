@@ -33,7 +33,7 @@ export class FallingSand1Component {
 
   sketch(s:p5) { 
     //TODO : Add remove sand on right click
-    const width = 600;
+    const width = 1800;
     const height = 600;
     const rainSize = 15;
     const pixelSize = 10;
@@ -127,11 +127,10 @@ export class FallingSand1Component {
             }
           }
         }
-        /*
         color += pixelSize/20;
         if(color > 360) {
           color = 0;
-        } */  
+        }  
       }
     };
   }
