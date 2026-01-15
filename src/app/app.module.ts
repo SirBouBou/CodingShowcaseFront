@@ -10,35 +10,28 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MyTetrisComponent } from './my-tetris/my-tetris.component';
 import { GamesComponent } from './games/games.component';
 import { ShowcasesComponent } from './showcases/showcases.component';
 import { ProfileComponent } from './profile/profile.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    FallingSand1Component,
-    HeaderComponent,
-    FooterComponent,
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent,
-    MyTetrisComponent,
-    GamesComponent,
-    ShowcasesComponent,
-    ProfileComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        FallingSand1Component,
+        HeaderComponent,
+        FooterComponent,
+        LoginComponent,
+        RegisterComponent,
+        HomeComponent,
+        MyTetrisComponent,
+        GamesComponent,
+        ShowcasesComponent,
+        ProfileComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {
     title = 'CodingShowcase';
  }
