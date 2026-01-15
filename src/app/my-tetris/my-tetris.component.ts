@@ -2,9 +2,10 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import p5 from 'p5';
 
 @Component({
-  selector: 'app-my-tetris',
-  templateUrl: './my-tetris.component.html',
-  styleUrl: './my-tetris.component.css'
+    selector: 'app-my-tetris',
+    templateUrl: './my-tetris.component.html',
+    styleUrl: './my-tetris.component.css',
+    standalone: false
 })
 export class MyTetrisComponent {
   @ViewChild('sketchContainer', { static: true }) sketchContainer!: ElementRef;

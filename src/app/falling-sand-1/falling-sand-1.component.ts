@@ -2,9 +2,10 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import p5 from 'p5';
 
 @Component({
-  selector: 'app-falling-sand-1',
-  templateUrl: './falling-sand-1.component.html',
-  styleUrl: './falling-sand-1.component.css'
+    selector: 'app-falling-sand-1',
+    templateUrl: './falling-sand-1.component.html',
+    styleUrl: './falling-sand-1.component.css',
+    standalone: false
 })
 export class FallingSand1Component {
   @ViewChild('sketchContainer', { static: true }) sketchContainer!: ElementRef;

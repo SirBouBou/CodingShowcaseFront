@@ -3,9 +3,10 @@ import { ShowcaseService } from '../_services/showcase.service';
 import { ShowcaseModel } from '../_models/showcase.model';
 
 @Component({
-  selector: 'app-showcases',
-  templateUrl: './showcases.component.html',
-  styleUrl: './showcases.component.css'
+    selector: 'app-showcases',
+    templateUrl: './showcases.component.html',
+    styleUrl: './showcases.component.css',
+    standalone: false
 })
 export class ShowcasesComponent {
   public showcases: ShowcaseModel[] = [];

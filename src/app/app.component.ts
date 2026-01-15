@@ -5,9 +5,10 @@ import { AuthService } from './_services/auth.service';
 import { EventBusService } from './_shared/event-bus.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent {
   title = "CodingShowcase"

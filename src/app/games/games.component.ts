@@ -3,9 +3,10 @@ import { GameModel } from '../_models/game.model';
 import { GameService } from '../_services/game.service';
 
 @Component({
-  selector: 'app-games',
-  templateUrl: './games.component.html',
-  styleUrl: './games.component.css'
+    selector: 'app-games',
+    templateUrl: './games.component.html',
+    styleUrl: './games.component.css',
+    standalone: false
 })
 export class GamesComponent {
   public games: GameModel[] = [];
