@@ -4,4 +4,8 @@ import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http"
 import { routes } from "./app/app-routing.module";
 import { provideRouter } from "@angular/router";
 
-bootstrapApplication(AppComponent, {providers: [provideHttpClient(withInterceptorsFromDi()), provideRouter(routes)]}).catch((e) => console.error(e));
+try {
+  bootstrapApplication(AppComponent, {providers: [provideHttpClient(withInterceptorsFromDi()), provideRouter(routes)]})
+} catch(e) {
+  console.error(e)
+};
