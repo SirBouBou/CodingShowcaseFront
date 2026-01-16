@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -12,7 +12,8 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class GameService {
-  constructor(private http: HttpClient) {}
+  private readonly http = inject(HttpClient);
+  constructor() {}
 
   getAll(): Observable<any> {
     return this.http.get(AUTH_API + "getAll");

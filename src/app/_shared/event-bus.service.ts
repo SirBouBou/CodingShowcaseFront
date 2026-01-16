@@ -7,7 +7,7 @@ import { EventData } from './event.class';
   providedIn: 'root',
 })
 export class EventBusService {
-  private subject$ = new Subject<EventData>();
+  private readonly subject$ = new Subject<EventData>();
 
   emit(event: EventData) {
     this.subject$.next(event);

@@ -8,8 +8,8 @@ describe('MyTetrisComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MyTetrisComponent]
-    })
+    imports: [MyTetrisComponent]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(MyTetrisComponent);

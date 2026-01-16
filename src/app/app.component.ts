@@ -1,16 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StorageService } from './_services/storage.service';
 import { AuthService } from './_services/auth.service';
 import { EventBusService } from './_shared/event-bus.service';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    standalone: false
+    imports: [HeaderComponent, FooterComponent, RouterOutlet],
 })
-export class AppComponent {
+
+export class AppComponent implements OnInit {
   title = "CodingShowcase"
   private roles: string[] = [];
   isLoggedIn = false;
@@ -22,9 +26,9 @@ export class AppComponent {
   eventBusSub?: Subscription;
 
   constructor(
-    private storageService: StorageService,
-    private authService: AuthService,
-    private eventBusService: EventBusService
+    private readonly storageService: StorageService,
+    private readonly authService: AuthService,
+    private readonly eventBusService: EventBusService
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +51,7 @@ export class AppComponent {
       next: res => {
         console.log(res);
         this.storageService.clean();
-        window.location.reload();
+        globalThis.location.reload();
       },
       error: err => {
         console.log(err);

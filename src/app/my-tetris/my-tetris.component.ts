@@ -1,13 +1,13 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import p5 from 'p5';
 
 @Component({
     selector: 'app-my-tetris',
     templateUrl: './my-tetris.component.html',
     styleUrl: './my-tetris.component.css',
-    standalone: false
+    imports: [],
 })
-export class MyTetrisComponent {
+export class MyTetrisComponent implements OnInit, OnDestroy {
   @ViewChild('sketchContainer', { static: true }) sketchContainer!: ElementRef;
   private p5!: p5; 
   private canvas: HTMLElement | null | undefined;

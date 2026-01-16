@@ -6,7 +6,7 @@ import { StorageService } from '../_services/storage.service';
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
-    standalone: false
+    imports: [],
 })
 export class LoginComponent implements OnInit {
   form: any = {
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   username = "";
   icon = "";
 
-  constructor(private authService: AuthService, private storageService: StorageService) { }
+  constructor(private readonly authService: AuthService, private readonly storageService: StorageService) { }
 
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
@@ -51,6 +51,6 @@ export class LoginComponent implements OnInit {
   }
 
   reloadPage(): void {
-    window.location.reload();
+    globalThis.location.reload();
   }
 }

@@ -5,18 +5,18 @@
       <a class="p-2 text-dark" href="/games">Games</a>
     </nav>
     
-    @if (!isLoggedIn) {
+    @if (!appcomponent.isLoggedIn) {
       <a class="btn btn-outline-primary" routerLink="/login">Sign up</a>
     } @else {
       <div id="profile" class="dropdown rounded border">
-        <a class="d-flex flex-column flex-md-row align-items-start p-1 text-dark btn dropdown-toggle" role="button"
+        <button class="d-flex flex-column flex-md-row align-items-start p-1 text-dark btn dropdown-toggle"
           id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img [src]="iconPath" class="border box-shadow rounded-circle me-2">
-          <span class="me-5 align-middle">{{ username }}</span>
-        </a>
+          <img [src]="appcomponent.iconPath" alt="ProfileIcon" class="border box-shadow rounded-circle me-2">
+          <span class="me-5 align-middle">{{ appcomponent.username }}</span>
+        </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="/profile" routerLink="profile">Profile</a>
-          <a class="dropdown-item" (click)="logout()">Logout</a>         
+          <a class="dropdown-item" (click)="appcomponent.logout()">Logout</a>         
         </div>
       </div>
     }

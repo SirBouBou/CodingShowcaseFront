@@ -9,16 +9,16 @@ export class StorageService {
   constructor() {}
 
   clean(): void {
-    window.sessionStorage.clear();
+    globalThis.sessionStorage.clear();
   }
 
   public saveUser(user: any): void {
-    window.sessionStorage.removeItem(USER_KEY);
-    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+    globalThis.sessionStorage.removeItem(USER_KEY);
+    globalThis.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
   public getUser(): any {
-    const user = window.sessionStorage.getItem(USER_KEY);
+    const user = globalThis.sessionStorage.getItem(USER_KEY);
     if (user) {
       return JSON.parse(user);
     }
@@ -27,7 +27,7 @@ export class StorageService {
   }
 
   public isLoggedIn(): boolean {
-    const user = window.sessionStorage.getItem(USER_KEY);
+    const user = globalThis.sessionStorage.getItem(USER_KEY);
     if (user) {
       return true;
     }
