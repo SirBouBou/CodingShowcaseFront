@@ -1,20 +1,144 @@
-<div class="row">
-    <div class="col-sm-6 mb-3 mb-sm-0">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
+<div class="profile-container">
+  <h1>📋 Profil - Vérification des Autorisations</h1>
+
+  <button (click)="reloadTests()" class="btn-reload" [disabled]="authorizationTests.loading">
+    🔄 Recharger les tests
+  </button>
+
+  <div class="tests-section">
+    <!-- Test Everyone (Public) -->
+    <div
+      [ngClass]="getStatusClass(authorizationTests.everyone.status) || 'status-loading'"
+      class="test-card"
+    >
+      <div class="test-header">
+        <h3>👥 Everyone (Public)</h3>
+        <span
+          [ngClass]="getStatusClass(authorizationTests.everyone.status) || 'status-loading'"
+          class="status-badge"
+        >
+          {{ getStatusLabel(authorizationTests.everyone.status) }}
+        </span>
       </div>
+
+      @if (authorizationTests.everyone.body) {
+        <p class="response-body">{{ authorizationTests.everyone.body }}</p>
+      }
+
+      @if (authorizationTests.everyone.error) {
+        <div class="error-box">
+          {{ authorizationTests.everyone.error }}
+        </div>
+      }
     </div>
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
+
+    <!-- Test User Role -->
+    <div
+      [ngClass]="getStatusClass(authorizationTests.user.status) || 'status-loading'"
+      class="test-card"
+    >
+      <div class="test-header">
+        <h3>👤 User Role</h3>
+        <span
+          [ngClass]="getStatusClass(authorizationTests.user.status) || 'status-loading'"
+          class="status-badge"
+        >
+          {{ getStatusLabel(authorizationTests.user.status) }}
+        </span>
       </div>
+
+      @if (authorizationTests.user.body) {
+        <p class="response-body">{{ authorizationTests.user.body }}</p>
+      }
+
+      @if (authorizationTests.user.error) {
+        <div class="error-box">
+          {{ authorizationTests.user.error }}
+        </div>
+      }
+    </div>
+
+    <!-- Test Mod Role -->
+    <div
+      [ngClass]="getStatusClass(authorizationTests.mod.status) || 'status-loading'"
+      class="test-card"
+    >
+      <div class="test-header">
+        <h3>🔨 Mod Role</h3>
+        <span
+          [ngClass]="getStatusClass(authorizationTests.mod.status) || 'status-loading'"
+          class="status-badge"
+        >
+          {{ getStatusLabel(authorizationTests.mod.status) }}
+        </span>
+      </div>
+
+      @if (authorizationTests.mod.body) {
+        <p class="response-body">{{ authorizationTests.mod.body }}</p>
+      }
+
+      @if (authorizationTests.mod.error) {
+        <div class="error-box">
+          {{ authorizationTests.mod.error }}
+        </div>
+      }
+    </div>
+
+    <!-- Test Admin Role -->
+    <div
+      [ngClass]="getStatusClass(authorizationTests.admin.status) || 'status-loading'"
+      class="test-card"
+    >
+      <div class="test-header">
+        <h3>👑 Admin Role</h3>
+        <span
+          [ngClass]="getStatusClass(authorizationTests.admin.status) || 'status-loading'"
+          class="status-badge"
+        >
+          {{ getStatusLabel(authorizationTests.admin.status) }}
+        </span>
+      </div>
+
+      @if (authorizationTests.admin.body) {
+        <p class="response-body">{{ authorizationTests.admin.body }}</p>
+      }
+
+      @if (authorizationTests.admin.error) {
+        <div class="error-box">
+          {{ authorizationTests.admin.error }}
+        </div>
+      }
     </div>
   </div>
+
+  @if (!authorizationTests.loading) {
+    <div class="summary-section">
+      <h2>📊 Résumé</h2>
+      <ul>
+        <li
+          [ngClass]="getStatusClass(authorizationTests.everyone.status) || 'status-loading'"
+        >
+          Everyone : {{ getStatusLabel(authorizationTests.everyone.status) }}
+        </li>
+
+        <li
+          [ngClass]="getStatusClass(authorizationTests.user.status) || 'status-loading'"
+        >
+          User : {{ getStatusLabel(authorizationTests.user.status) }}
+        </li>
+
+        <li
+          [ngClass]="getStatusClass(authorizationTests.mod.status) || 'status-loading'"
+        >
+          Mod : {{ getStatusLabel(authorizationTests.mod.status) }}
+        </li>
+
+        <li
+          [ngClass]="getStatusClass(authorizationTests.admin.status) || 'status-loading'"
+        >
+          Admin : {{ getStatusLabel(authorizationTests.admin.status) }}
+        </li>
+      </ul>
+    </div>
+  }
+</div>

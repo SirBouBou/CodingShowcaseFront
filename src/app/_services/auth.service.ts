@@ -1,12 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 const AUTH_API = `${environment.apiUrl}/auth/`;
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  withCredentials: true
 };
 
 @Injectable({
@@ -36,6 +37,16 @@ export class AuthService {
         password,
       },
       httpOptions
+    );
+  }
+
+  refreshToken(): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'refresh', 
+      {}, 
+      httpOptions
+    ).pipe(
+      tap(response => {console.log("Tokens refreshed");})
     );
   }
 

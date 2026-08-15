@@ -6,12 +6,13 @@ import { EventBusService } from './_shared/event-bus.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    imports: [HeaderComponent, FooterComponent, RouterOutlet],
+    imports: [HeaderComponent, FooterComponent, RouterOutlet, CommonModule],
 })
 
 export class AppComponent implements OnInit {
