@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage
-          path: coverage/CodingShowcaseFront/lcov.info
+          path: coverage/lcov.info
         
       - name: Analyse SonarQube
         uses: SonarSource/sonarqube-scan-action@v6
