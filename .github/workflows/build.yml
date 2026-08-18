@@ -40,7 +40,7 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v6
         with:
             args: |
-             -Dsonar.javascript.lcov.reportPaths=coverage/name-project/lcov.info
+             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
