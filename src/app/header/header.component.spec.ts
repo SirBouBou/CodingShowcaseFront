@@ -1,3 +1,5 @@
+import { beforeEach, describe, expect, it } from "vitest";
+import { vi, type MockedObject } from "vitest";
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
@@ -7,37 +9,45 @@ import { EventBusService } from '../_shared/event-bus.service';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HeaderComponent', () => {
-  let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
-  let storageService: jasmine.SpyObj<StorageService>;
-  let authService: jasmine.SpyObj<AuthService>;
-  let eventBusService: jasmine.SpyObj<EventBusService>;
+    let component: HeaderComponent;
+    let fixture: ComponentFixture<HeaderComponent>;
+    let storageService: MockedObject<StorageService>;
+    let authService: MockedObject<AuthService>;
+    let eventBusService: MockedObject<EventBusService>;
 
-  beforeEach(async () => {
-    const storageSpy = jasmine.createSpyObj('StorageService', ['isLoggedIn', 'getUser', 'clean']);
-    const authSpy = jasmine.createSpyObj('AuthService', ['logout']);
-    const eventBusSpy = jasmine.createSpyObj('EventBusService', ['on']);
+    beforeEach(async () => {
+        const storageSpy = {
+            isLoggedIn: vi.fn().mockName("StorageService.isLoggedIn"),
+            getUser: vi.fn().mockName("StorageService.getUser"),
+            clean: vi.fn().mockName("StorageService.clean")
+        };
+        const authSpy = {
+            logout: vi.fn().mockName("AuthService.logout")
+        };
+        const eventBusSpy = {
+            on: vi.fn().mockName("EventBusService.on")
+        };
 
-    await TestBed.configureTestingModule({
-      imports: [HeaderComponent, RouterTestingModule],
-      providers: [
-        { provide: StorageService, useValue: storageSpy },
-        { provide: AuthService, useValue: authSpy },
-        { provide: EventBusService, useValue: eventBusSpy }
-      ]
-    })
-    .compileComponents();
+        await TestBed.configureTestingModule({
+            imports: [HeaderComponent, RouterTestingModule],
+            providers: [
+                { provide: StorageService, useValue: storageSpy },
+                { provide: AuthService, useValue: authSpy },
+                { provide: EventBusService, useValue: eventBusSpy }
+            ]
+        })
+            .compileComponents();
 
-    storageService = TestBed.inject(StorageService) as jasmine.SpyObj<StorageService>;
-    authService = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
-    eventBusService = TestBed.inject(EventBusService) as jasmine.SpyObj<EventBusService>;
-    
-    fixture = TestBed.createComponent(HeaderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        storageService = TestBed.inject(StorageService) as MockedObject<StorageService>;
+        authService = TestBed.inject(AuthService) as MockedObject<AuthService>;
+        eventBusService = TestBed.inject(EventBusService) as MockedObject<EventBusService>;
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+        fixture = TestBed.createComponent(HeaderComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

@@ -9,15 +9,16 @@ import p5 from 'p5';
 })
 export class FallingSand1Component implements OnInit, OnDestroy {
   @ViewChild('sketchContainer', { static: true }) sketchContainer!: ElementRef;
-  private p5!: p5; 
-  private canvas: HTMLElement | null | undefined;
+  private p5!: p5;
+  private canvas?: HTMLElement;
 
   pixelSize:number = 5;
 
   ngOnInit() {
-    this.canvas = document.getElementById("canvas");
-    if(this.canvas != null) {
-      this.p5 = new p5(this.sketch, this.canvas);      
+    const canvasElement = document.getElementById('canvas');
+    if (canvasElement instanceof HTMLElement) {
+      this.canvas = canvasElement;
+      this.initP5();
     }
   }
 
@@ -27,7 +28,13 @@ export class FallingSand1Component implements OnInit, OnDestroy {
 
   reload() {
     this.p5?.remove();
-    if(this.canvas != null) {
+    if (this.canvas) {
+      this.p5 = new p5(this.sketch, this.canvas);
+    }
+  }
+
+  private initP5() {
+    if (this.canvas) {
       this.p5 = new p5(this.sketch, this.canvas);
     }
   }
