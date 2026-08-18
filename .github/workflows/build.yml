@@ -27,7 +27,7 @@ jobs:
           npm install --force
 
       - name: Run tests with coverage
-        run: ng test --no-watch --coverage
+        run: npm test
         continue-on-error: true
 
       - name: Upload coverage report
