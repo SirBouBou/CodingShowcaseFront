@@ -12,10 +12,35 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - uses: SonarSource/sonarqube-scan-action@v6
+          
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: |
+          npm install --force
+
+      - name: Run tests with coverage
+        run: npm test 
+        continue-on-error: true
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/CodingShowcaseFront/lcov.info
+        
+      - name: Analyse SonarQube
+        uses: SonarSource/sonarqube-scan-action@v6
+        with:
+            args: |
+             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
