@@ -1,19 +1,21 @@
 @if(selectedShowcase == -1) {
-    <div>
-        <select [(ngModel)]="selectedShowcase">
-            <option selected [ngValue]=-1>Select a showcase</option>
-            <option *ngFor="let s of showcases; let i = index" [ngValue]="i">{{s.name}}</option>
-        </select>
-    </div>
+  <div>
+    <select [(ngModel)]="selectedShowcase">
+      <option selected [ngValue]=-1>Select a showcase</option>
+      @for (s of showcases; track s; let i = $index) {
+        <option [ngValue]="i">{{s.name}}</option>
+      }
+    </select>
+  </div>
 }
 
 @if(selectedShowcase == 0) {
-    <div>
-        <div class="pricing-header px-3 py-2 pb-md-4 mx-auto ">
-            <h1 class="display-4">{{showcases[selectedShowcase].name}}</h1>
-            <p class="lead">{{showcases[selectedShowcase].description}}</p>
-        </div>
-        <app-falling-sand-1></app-falling-sand-1>
+  <div>
+    <div class="pricing-header px-3 py-2 pb-md-4 mx-auto ">
+      <h1 class="display-4">{{showcases[selectedShowcase].name}}</h1>
+      <p class="lead">{{showcases[selectedShowcase].description}}</p>
     </div>
+    <app-falling-sand-1></app-falling-sand-1>
+  </div>
 }
 

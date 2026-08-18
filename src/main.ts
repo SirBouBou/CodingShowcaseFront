@@ -1,3 +1,4 @@
+import { provideZoneChangeDetection } from "@angular/core";
 import { bootstrapApplication } from "@angular/platform-browser";
 import { AppComponent } from "./app/app.component";
 import { provideHttpClient, withInterceptors, withInterceptorsFromDi } from "@angular/common/http";
@@ -6,7 +7,7 @@ import { provideRouter } from "@angular/router";
 import { authInterceptor } from "./app/_helpers/http.interceptor";
 
 try {
-  bootstrapApplication(AppComponent, {providers: [provideHttpClient(withInterceptors([authInterceptor])), provideRouter(routes)]})
+  bootstrapApplication(AppComponent, {providers: [provideZoneChangeDetection(),provideHttpClient(withInterceptors([authInterceptor])), provideRouter(routes)]})
 } catch(e) {
   console.error(e)
 };
