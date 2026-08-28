@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShowcaseService } from '../_services/showcase.service';
 import { ShowcaseModel } from '../_models/showcase.model';
-import { FallingSand1Component } from '../falling-sand-1/falling-sand-1.component';
+import { FallingSand1Component } from '../showcaseList/falling-sand-1/falling-sand-1.component';
 import { FormsModule } from '@angular/forms';
 
 

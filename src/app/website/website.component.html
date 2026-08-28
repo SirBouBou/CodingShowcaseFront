@@ -1,0 +1,20 @@
+@if(selectedWebsite == -1) {
+  <div>
+    <select [(ngModel)]="selectedWebsite">
+      <option selected [ngValue]=-1>Select a website</option>
+      @for (s of websites; track s; let i = $index) {
+        <option [ngValue]="i">{{s.name}}</option>
+      }
+    </select>
+  </div>
+}
+
+@if(selectedWebsite == 0) {
+  <div>
+    <div class="pricing-header px-3 py-2 pb-md-4 mx-auto ">
+      <h1 class="display-4">{{websites[selectedWebsite].name}}</h1>
+      <p class="lead">{{websites[selectedWebsite].description}}</p>
+    </div>
+    <app-game-db></app-game-db>
+  </div>
+}

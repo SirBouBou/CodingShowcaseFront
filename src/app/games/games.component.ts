@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameModel } from '../_models/game.model';
 import { GameService } from '../_services/game.service';
-import { MyTetrisComponent } from '../my-tetris/my-tetris.component';
+import { MyTetrisComponent } from '../gameList/my-tetris/my-tetris.component';
 import { FormsModule } from '@angular/forms';
 
 
