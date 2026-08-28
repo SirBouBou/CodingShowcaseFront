@@ -1,1 +1,94 @@
-<p>game-db works!</p>
+<div class="games-container">
+  <div class="header">
+    <div>
+      <h1>Games</h1>
+      <p>Game database</p>
+    </div>
+
+    <span class="game-count">{{ games.length }} games</span>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="games-table">
+      <thead>
+        <tr>
+          <th class="image-column"></th>
+          <th>Game</th>
+          <th>Released</th>
+          <th>Rating</th>
+          <th>Metacritic</th>
+          <th>Platforms</th>
+          <th>Genres</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (game of games; track game.id) {
+          <tr>
+            <td class="image-column">
+              @if (game.imageUrl) {
+                <img
+                  class="game-image"
+                  [src]="game.imageUrl"
+                  [alt]="game.name"
+                >
+              } @else {
+                <div class="image-placeholder">🎮</div>
+              }
+            </td>
+
+            <td class="game-name">
+              <span>{{ game.name }}</span>
+              <small>#{{ game.id }}</small>
+            </td>
+
+            <td class="released">
+              {{ game.released | date:'dd/MM/yyyy' }}
+            </td>
+
+            <td>
+              <div class="rating">
+                <span class="star">★</span>
+                <strong>{{ game.rating | number:'1.1-2' }}</strong>
+                <small>{{ game.ratingCount }} votes</small>
+              </div>
+            </td>
+
+            <td>
+              @if (game.metacritics) {
+                <span class="metacritic">
+                  {{ game.metacritics }}
+                </span>
+              } @else {
+                <span class="muted">—</span>
+              }
+            </td>
+
+            <td>
+              <div class="tags">
+                @for (platform of game.platforms; track platform) {
+                  <span class="tag platform">{{ platform }}</span>
+                }
+              </div>
+            </td>
+
+            <td>
+              <div class="tags">
+                @for (genre of game.genres; track genre) {
+                  <span class="tag genre">{{ genre }}</span>
+                }
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (games.length === 0) {
+    <div class="empty">
+      <span>🎮</span>
+      <p>No games found</p>
+    </div>
+  }
+</div>

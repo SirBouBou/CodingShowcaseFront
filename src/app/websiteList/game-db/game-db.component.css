@@ -1,0 +1,215 @@
+.games-container {
+  padding: 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Header */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.header p {
+  margin: 0.3rem 0 0;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.game-count {
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: #f0f0f0;
+  color: #666;
+  font-size: 0.8rem;
+}
+
+/* Table */
+
+.table-wrapper {
+  overflow-x: auto;
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+  background: white;
+}
+
+.games-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1100px;
+}
+
+.games-table th {
+  padding: 0.9rem 1rem;
+  background: #f7f7f7;
+  border-bottom: 1px solid #ddd;
+
+  color: #777;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: left;
+}
+
+.games-table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.games-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.games-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.games-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Image */
+
+.image-column {
+  width: 55px;
+  padding-right: 0 !important;
+}
+
+.game-image,
+.image-placeholder {
+  width: 42px;
+  height: 42px;
+  border-radius: 6px;
+}
+
+.game-image {
+  display: block;
+  object-fit: cover;
+}
+
+.image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eee;
+  font-size: 1.1rem;
+}
+
+/* Game name */
+
+.game-name {
+  min-width: 220px;
+}
+
+.game-name span {
+  display: block;
+  font-weight: 600;
+  color: #222;
+}
+
+.game-name small {
+  display: block;
+  margin-top: 0.2rem;
+  color: #aaa;
+  font-size: 0.7rem;
+}
+
+/* Rating */
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.rating .star {
+  color: #e7a800;
+  font-size: 0.9rem;
+}
+
+.rating strong {
+  font-size: 0.9rem;
+}
+
+.rating small {
+  margin-left: 0.2rem;
+  color: #999;
+  font-size: 0.7rem;
+}
+
+/* Metacritic */
+
+.metacritic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 32px;
+  height: 28px;
+  padding: 0 0.35rem;
+
+  border-radius: 5px;
+  background: #e8f5e9;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.muted {
+  color: #aaa;
+}
+
+/* Tags */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  max-width: 220px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.platform {
+  background: #eef3ff;
+  color: #52658c;
+}
+
+.genre {
+  background: #f4efff;
+  color: #765ba8;
+}
+
+/* Empty */
+
+.empty {
+  padding: 4rem;
+  text-align: center;
+  color: #888;
+}
+
+.empty span {
+  font-size: 2rem;
+}
+
+.empty p {
+  margin-top: 0.5rem;
+}
