@@ -1,57 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { StorageService } from '../_services/storage.service';
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterLink, Router } from '@angular/router';
 import { EventBusService } from '../_shared/event-bus.service';
-import { AuthService } from '../_services/auth.service';
 import { Subscription } from 'rxjs';
+import { SessionService } from '../_services/session.service';
+import { AsyncPipe } from '@angular/common';
+import { LoggerService } from '../_services/logger.service';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrl: './header.component.css',
-    imports: [RouterLink],
+    imports: [RouterLink, AsyncPipe],
 })
 export class HeaderComponent implements OnInit {
-    title = "CodingShowcase"
-    private roles: string[] = [];
-    isLoggedIn = false;
-    username?: string;
+    readonly title = "CodingShowcase"
+    readonly player$ = this.sessionService.player$;
+    readonly ICON_FOLDER = "../assets/AccountLogo/Icon"
 
-    ICON_FOLDER = "../assets/AccountLogo/Icon"
+    private readonly router = inject(Router);
+    private readonly logger = inject(LoggerService);
+
     iconPath: string = this.ICON_FOLDER + "0.png";
-    eventBusSub?: Subscription;
+
+    private eventBusSub?: Subscription;
 
     constructor(
-        private readonly storageService: StorageService,
-        private readonly authService: AuthService,
-        private readonly eventBusService: EventBusService
-    ) {}
+        private readonly eventBusService: EventBusService,
+        private readonly sessionService: SessionService
+    ) 
+    {}
     
     ngOnInit(): void {
-    this.isLoggedIn = this.storageService.isLoggedIn();
-
-    if (this.isLoggedIn) {
-      const user = this.storageService.getUser();
-      this.roles = user.roles;
-      this.username = user.username;
-      this.iconPath = this.ICON_FOLDER + user.profile.iconId + ".png";
-    }
-
-    this.eventBusSub = this.eventBusService.on('logout', () => {
-      this.logout();
-    });
+      this.eventBusSub = this.eventBusService.on('logout', () => {
+        this.logout();
+      });
   }
     
 
     logout(): void {
-    this.authService.logout().subscribe({
+    this.sessionService.logout().subscribe({
       next: res => {
-        console.log(res);
-        this.storageService.clean();
-        globalThis.location.reload();
+        this.router.navigate(['/login'], { replaceUrl: true });
       },
       error: err => {
-        console.log(err);
+        this.logger.error('Logout failed', err);
       }
     });
   }

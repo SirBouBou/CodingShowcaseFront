@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { PlayerIdentity } from '../_models/player.model';
 
-const USER_KEY = 'auth-user';
+const PLAYER_KEY = 'player';
 
 @Injectable({
   providedIn: 'root'
@@ -12,26 +13,23 @@ export class StorageService {
     globalThis.sessionStorage.clear();
   }
 
-  public saveUser(user: any): void {
-    globalThis.sessionStorage.removeItem(USER_KEY);
-    globalThis.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+  savePlayer(player: PlayerIdentity): void {
+    globalThis.sessionStorage.setItem(
+      PLAYER_KEY,
+      JSON.stringify(player)
+    );
   }
 
-  public getUser(): any {
-    const user = globalThis.sessionStorage.getItem(USER_KEY);
-    if (user) {
-      return JSON.parse(user);
+  getPlayer(): PlayerIdentity | null {
+    const player = globalThis.sessionStorage.getItem(PLAYER_KEY);
+    if (player) {
+      return JSON.parse(player);
     }
 
     return null;
   }
 
-  public isLoggedIn(): boolean {
-    const user = globalThis.sessionStorage.getItem(USER_KEY);
-    if (user) {
-      return true;
-    }
-
-    return false;
+  removePlayer(): void {
+    globalThis.sessionStorage.removeItem(PLAYER_KEY);
   }
 }

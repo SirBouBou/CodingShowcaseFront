@@ -1,24 +1,30 @@
 <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
     <h5 class="my-0 font-weight-normal company" style="cursor: pointer;" routerLink="/home">CodingShowcase</h5>
     <nav class="my-2 my-md-0 me-1">
-      <a class="p-2 text-dark" href="/websites">Websites</a>
-      <a class="p-2 text-dark" href="/showcases">Showcases</a>
-      <a class="p-2 text-dark" href="/games">Games</a>
+      <a class="p-2 text-dark" routerLink="/websites">Websites</a>
+      <a class="p-2 text-dark" routerLink="/showcases">Showcases</a>
+      <a class="p-2 text-dark" routerLink="/games">Games</a>
     </nav>
     
-    @if (!isLoggedIn) {
-      <a class="btn btn-outline-primary" routerLink="/login">Sign up</a>
-    } @else {
+    @if (player$ | async; as player) {
       <div id="profile" class="dropdown rounded border">
         <button class="d-flex flex-column flex-md-row align-items-start p-1 text-dark btn dropdown-toggle"
           id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img [src]="iconPath" alt="ProfileIcon" class="border box-shadow rounded-circle me-2">
-          <span class="me-5 align-middle">{{ username }}</span>
+          <span class="me-5 align-middle">{{ player.displayName }}</span>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="/profile">Profile</a>
+          @if (player.id.type === 'USER') {
+            <a
+              class="dropdown-item"
+              routerLink="/profile">
+              Profile
+            </a>
+          }
           <a class="dropdown-item" (click)="logout()">Logout</a>         
         </div>
       </div>
+    } @else {
+      <a class="btn btn-outline-primary" routerLink="/login">Sign up</a>
     }
 </header>

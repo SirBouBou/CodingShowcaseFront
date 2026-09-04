@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { PlayerIdentity } from '../_models/player.model';
 
 const AUTH_API = `${environment.apiUrl}/auth/`;
 
@@ -17,8 +18,8 @@ export class AuthService {
   private readonly http = inject(HttpClient);
   constructor() {}
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(
+  login(username: string, password: string): Observable<PlayerIdentity> {
+    return this.http.post<PlayerIdentity>(
       AUTH_API + 'signin',
       {
         username,
@@ -28,8 +29,8 @@ export class AuthService {
     );
   }
 
-  register(username: string, email: string, password: string): Observable<any> {
-    return this.http.post(
+  register(username: string, email: string, password: string): Observable<PlayerIdentity> {
+    return this.http.post<PlayerIdentity>(
       AUTH_API + 'signup',
       {
         username,
@@ -40,17 +41,22 @@ export class AuthService {
     );
   }
 
-  refreshToken(): Observable<any> {
-    return this.http.post(
+  refreshToken(): Observable<void> {
+    return this.http.post<void>(
       AUTH_API + 'refresh', 
       {}, 
       httpOptions
-    ).pipe(
-      tap(response => {console.log("Tokens refreshed");})
     );
   }
 
-  logout(): Observable<any> {
-    return this.http.post(AUTH_API + 'signout', { }, httpOptions);
+  logout(): Observable<void> {
+    return this.http.post<void>(AUTH_API + 'signout', { }, httpOptions);
+  }
+
+  getCurrentUser(): Observable<PlayerIdentity> {
+    return this.http.get<PlayerIdentity>(
+      AUTH_API + 'me', 
+      httpOptions
+    );
   }
 }

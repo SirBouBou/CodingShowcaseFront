@@ -3,6 +3,7 @@ import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http
 import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { SKIP_401_REDIRECT } from '../_helpers/http.interceptor';
+import { LoggerService } from './logger.service';
 
 
 const AUTH_API = `${environment.apiUrl}/test/`;
@@ -12,6 +13,7 @@ const AUTH_API = `${environment.apiUrl}/test/`;
 })
 export class TestService {
     private readonly http = inject(HttpClient);
+    private readonly logger = inject(LoggerService);
     constructor() {}
 
     private getRequestOptions() {
@@ -28,7 +30,7 @@ export class TestService {
           AUTH_API + 'all',
           this.getRequestOptions()
         ).pipe(catchError((error: HttpErrorResponse): Observable<never> => {
-          console.error("getEveryone error:", error.status);
+          this.logger.error("getEveryone error:", error.status);
           return throwError(() => error);;
       }))
     }
@@ -38,7 +40,7 @@ export class TestService {
         AUTH_API + 'user',
         this.getRequestOptions()
       ).pipe(catchError((error: HttpErrorResponse): Observable<never> => {
-          console.error("getUserRole error:", error.status);
+          this.logger.error("getUserRole error:", error.status);
           return throwError(() => error);;
       }))
     }
@@ -48,7 +50,7 @@ export class TestService {
         AUTH_API + 'mod',
         this.getRequestOptions()
       ).pipe(catchError((error: HttpErrorResponse): Observable<never> => {
-          console.error("getModRole error:", error.status);
+          this.logger.error("getModRole error:", error.status);
           return throwError(() => error);;
       }))
     }
@@ -58,7 +60,7 @@ export class TestService {
         AUTH_API + 'admin',
         this.getRequestOptions()
       ).pipe(catchError((error: HttpErrorResponse): Observable<never> => {
-          console.error("getAdminRole error:", error.status);
+          this.logger.error("getAdminRole error:", error.status);
           return throwError(() => error);;
       }))
     }

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterOutlet } from '@angular/router';
+import { SessionService } from './_services/session.service';
 
 
 @Component({
@@ -11,9 +12,12 @@ import { RouterOutlet } from '@angular/router';
     imports: [HeaderComponent, FooterComponent, RouterOutlet],
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
 
-  constructor(
+  constructor(private sessionService: SessionService
   ) {}
   
+  ngOnInit():void {
+    this.sessionService.initialize().subscribe();
+  }
 }

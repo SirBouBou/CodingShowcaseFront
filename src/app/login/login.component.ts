@@ -1,58 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
-import { StorageService } from '../_services/storage.service';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SessionService } from '../_services/session.service';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, AsyncPipe],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+  
   form: any = {
     username: null,
     password: null
   };
-  isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  roles: string[] = [];
-  username = "";
-  icon = "";
 
-  constructor(private readonly authService: AuthService, private readonly storageService: StorageService) { }
+  readonly player$ = this.sessionService.player$;
 
-  ngOnInit(): void {
-    if (this.storageService.isLoggedIn()) {
-      this.isLoggedIn = true;
-      let user = this.storageService.getUser();
-      this.roles = user.roles;
-      this.username = user.username;
-      this.icon = "../assets/AccountLogo/Icon" + user.profile.iconId + ".png";
-    }
-  }
+  constructor(private readonly authService: AuthService, private readonly sessionService: SessionService) { }
 
   onSubmit(): void {
     const { username, password } = this.form;
+    this.isLoginFailed = false;
+    this.errorMessage = '';
     this.authService.login(username, password).subscribe({
-      next: data => {
-        this.storageService.saveUser(data);
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
+      next: player => {
+          this.sessionService.setPlayer(player);
       },
       error: err => {
-        this.errorMessage = err.error.message;
         this.isLoginFailed = true;
-      },
-      complete: () => {
-        this.reloadPage();
+        this.errorMessage = err.error?.message ?? 'Unable to login.';
       }
     });
-  }
-
-  reloadPage(): void {
-    globalThis.location.reload();
   }
 }

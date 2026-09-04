@@ -17,7 +17,6 @@ export class GameDBComponent implements OnInit {
     ngOnInit() {
       this.dbGameService.getPage(0).subscribe((data) => {
         this.games = data.content;
-        console.log(this.games)
       })
     }
 }
