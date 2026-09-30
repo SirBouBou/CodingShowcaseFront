@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { PlayerIdentity } from '../_models/player.model';
+import { SKIP_401_REDIRECT } from '../_context/auth-context';
 
 const AUTH_API = `${environment.apiUrl}/auth/`;
 
@@ -56,7 +57,10 @@ export class AuthService {
   getCurrentUser(): Observable<PlayerIdentity> {
     return this.http.get<PlayerIdentity>(
       AUTH_API + 'me', 
-      httpOptions
+      {
+        ...httpOptions,
+        context: new HttpContext().set(SKIP_401_REDIRECT, true)
+      }
     );
   }
 }

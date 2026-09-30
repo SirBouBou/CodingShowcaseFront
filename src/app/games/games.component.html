@@ -1,13 +1,12 @@
-@if(selectedGame == -1) {
-  <div>
-    <select [(ngModel)]="selectedGame">
-      <option selected [ngValue]=-1>Select a game</option>
-      @for (g of games; track g; let i = $index) {
-        <option [ngValue]="i">{{g.name}}</option>
-      }
-    </select>
-  </div>
-}
+<div>
+  <select [(ngModel)]="selectedGame">
+    <option selected [ngValue]=-1>Select a game</option>
+    @for (g of games; track g; let i = $index) {
+      <option [ngValue]="i">{{g.name}}</option>
+    }
+  </select>
+</div>
+
 
 @if(selectedGame == 0) {
   <div>
@@ -16,5 +15,14 @@
       <p class="lead">{{games[selectedGame].description}}</p>
     </div>
     <app-my-tetris></app-my-tetris>
+  </div>
+}
+@if(selectedGame == 1) {
+  <div>
+    <div class="pricing-header px-3 py-2 pb-md-4 mx-auto ">
+      <h1 class="display-4">{{games[selectedGame].name}}</h1>
+      <p class="lead">{{games[selectedGame].description}}</p>
+    </div>
+    <app-tictactoe></app-tictactoe>
   </div>
 }

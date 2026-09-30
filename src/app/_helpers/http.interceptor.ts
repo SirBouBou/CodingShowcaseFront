@@ -1,12 +1,10 @@
 import { inject } from '@angular/core';
-import { HttpEvent, HttpRequest, HttpContextToken, HttpErrorResponse, HttpHandlerFn } from '@angular/common/http';
+import { HttpEvent, HttpRequest, HttpErrorResponse, HttpHandlerFn } from '@angular/common/http';
 import { catchError, Observable, switchMap, throwError } from 'rxjs';
 import { StorageService } from '../_services/storage.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
-
-const SKIP_401_REDIRECT = new HttpContextToken<boolean>(() => false);
-export { SKIP_401_REDIRECT };
+import { SKIP_401_REDIRECT } from '../_context/auth-context';
 
 export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>>  {
   const authService = inject(AuthService);

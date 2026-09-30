@@ -20,6 +20,13 @@
               routerLink="/profile">
               Profile
             </a>
+          }@else if (player.id.type === 'GUEST') {
+            <a
+              class="dropdown-item"
+              role="button"
+              (click)="changeGuestName()">
+              Change name
+            </a>
           }
           <a class="dropdown-item" (click)="logout()">Logout</a>         
         </div>

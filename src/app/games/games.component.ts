@@ -3,13 +3,14 @@ import { GameModel } from '../_models/game.model';
 import { GameService } from '../_services/game.service';
 import { MyTetrisComponent } from '../gameList/my-tetris/my-tetris.component';
 import { FormsModule } from '@angular/forms';
+import { TictactoeComponent } from '../gameList/tictactoe/tictactoe.component';
 
 
 @Component({
     selector: 'app-games',
     templateUrl: './games.component.html',
     styleUrl: './games.component.css',
-    imports: [MyTetrisComponent, FormsModule],
+    imports: [MyTetrisComponent, TictactoeComponent, FormsModule],
 })
 export class GamesComponent implements OnInit {
   public games: GameModel[] = [];

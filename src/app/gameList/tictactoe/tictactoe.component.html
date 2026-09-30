@@ -1,0 +1,413 @@
+@if (room == null) {
+
+  <div class="games-page">
+
+    <div class="games-container">
+
+      <header class="games-header">
+
+        <div class="games-title">
+          <span class="game-type">TIC-TAC-TOE</span>
+          <h1>Game rooms</h1>
+          <p>
+            Join an existing room or create your own game.
+          </p>
+        </div>
+
+        <button
+          class="create-room-button"
+          (click)="createRoom()">
+
+          <span class="create-icon">+</span>
+          Create room
+
+        </button>
+
+      </header>
+
+
+      @if (rooms.length === 0) {
+
+        <div class="empty-state">
+
+          <div class="empty-icon">
+            🎮
+          </div>
+
+          <h2>No rooms available</h2>
+
+          <p>
+            There are currently no games waiting for players.
+          </p>
+
+          <button
+            class="create-room-button"
+            (click)="createRoom()">
+
+            <span class="create-icon">+</span>
+            Create the first room
+
+          </button>
+
+        </div>
+
+      } @else {
+
+        <div class="rooms-section">
+
+          <div class="rooms-section-header">
+
+            <div>
+              <h2>Available rooms</h2>
+              <span>
+                {{ rooms.length }}
+                {{ rooms.length === 1 ? 'room' : 'rooms' }}
+              </span>
+            </div>
+
+          </div>
+
+
+          <div class="rooms-grid">
+
+            @for (room of rooms; track room.id) {
+
+              <article class="room-card">
+
+                <div class="room-card-header">
+
+                  <div class="room-identity">
+
+                    <span class="room-label">
+                      ROOM
+                    </span>
+
+                    <span class="room-id">
+                      #{{ room.id }}
+                    </span>
+
+                  </div>
+
+                  <div
+                    class="room-capacity"
+                    [class.full]="room.activePlayers >= room.maxPlayers">
+
+                    <span class="capacity-icon">
+                      👥
+                    </span>
+
+                    <span>
+                      {{ room.activePlayers }} / {{ room.maxPlayers }}
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                <div class="room-players">
+
+                  <span class="section-label">
+                    PLAYERS
+                  </span>
+
+                  <div class="players-list">
+
+                    @for (player of room.players; track player) {
+
+                      @if (player != null) {
+
+                        <div class="player-row">
+
+                          <div class="player-avatar">
+                            {{ player.displayName.charAt(0).toUpperCase() }}
+                          </div>
+
+                          <span class="player-name">
+                            {{ player.displayName }}
+                          </span>
+
+                        </div>
+
+                      }
+
+                    }
+
+                    @if (room.activePlayers < room.maxPlayers) {
+
+                      <div class="player-row waiting-player">
+
+                        <div class="player-avatar empty-avatar">
+                          ?
+                        </div>
+
+                        <span class="player-name">
+                          Waiting for player
+                        </span>
+
+                      </div>
+
+                    }
+
+                  </div>
+
+                </div>
+
+
+                <div class="room-card-footer">
+
+                  @if (room.activePlayers < room.maxPlayers) {
+
+                    <div class="room-state available">
+
+                      <span class="state-dot"></span>
+
+                      <span>
+                        Waiting for players
+                      </span>
+
+                    </div>
+
+                    <button
+                      class="join-button"
+                      (click)="joinRoom(room.id)">
+
+                      Join room
+                      <span class="join-arrow">→</span>
+
+                    </button>
+
+                  } @else {
+
+                    <div class="room-state full">
+
+                      <span class="state-dot"></span>
+
+                      <span>
+                        Room full
+                      </span>
+
+                    </div>
+
+                    <button
+                      class="join-button disabled"
+                      disabled>
+
+                      Full
+
+                    </button>
+
+                  }
+
+                </div>
+
+              </article>
+
+            }
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+
+} @else {
+
+  <div class="game-room">
+
+    <div class="game-room-card">
+
+      <header class="game-room-header">
+
+        <div class="game-title">
+          <span class="game-type">TIC-TAC-TOE</span>
+          <h1>Game room</h1>
+        </div>
+
+        <div class="room-info">
+          <span class="room-label">ROOM</span>
+          <span class="room-id">#{{ room.id }}</span>
+        </div>
+
+      </header>
+
+
+      <div class="game-content">
+
+        <!-- Player 1 -->
+        <section class="player-card">
+
+          <div class="player-card-header">
+
+            <span class="player-label">
+              PLAYER 1
+            </span>
+
+            @if (room.players[0]) {
+              <span class="player-status"></span>
+            } @else {
+              <span class="player-status waiting"></span>
+            }
+
+          </div>
+
+
+          <div class="player-piece">
+            <!--<canvas width="100" height="100"></canvas>-->
+          </div>
+
+
+          @if (room.players[0]) {
+            <h2>
+              {{ room.players[0].displayName }}
+              @if(room.players[0].id.value === game?.playerX?.id?.value) {
+                (X)
+              } @else if (room.players[0].id.value === game?.playerO?.id?.value) {
+                (O)
+              }
+            </h2>
+          } @else {
+            <h2>
+              Waiting...
+            </h2>
+          }
+        </section>
+
+
+        <!-- Board -->
+        <main class="board-section">
+
+          <div class="board-frame">
+
+            <div class="board-header">
+              <span>BOARD</span>
+            </div>
+            @if (game?.status === 'PLAYING') {
+              <div class="board-status">
+                {{ game?.currentPlayer?.displayName }}'s turn
+              </div>
+            } @else if (game?.status === 'WAITING') {
+              <div class="board-status">
+                Waiting for opponent
+              </div>
+            } @else if (game?.status === 'DRAW') {
+              <div class="board-status game-result">
+                🤝 Draw
+              </div>
+            } @else if (game?.status === 'FINISHED') {
+              <div class="board-status game-result">
+                🏆 {{ game?.winner?.displayName }} wins!
+              </div>
+            }
+            <div
+              #sketchContainer
+              id="canvas" width="300" height="300">
+            </div>
+
+          </div>
+
+        </main>
+
+
+        <!-- Player 2 -->
+        <section class="player-card">
+
+          <div class="player-card-header">
+
+            <span class="player-label">
+              PLAYER 2
+            </span>
+
+            @if (room.players[1]) {
+              <span class="player-status"></span>
+            } @else {
+              <span class="player-status waiting"></span>
+            }
+
+          </div>
+
+
+          <div class="player-piece">
+            <!--<canvas width="100" height="100"></canvas>-->
+          </div>
+
+
+          @if (room.players[1]) {
+            <h2>
+              {{ room.players[1].displayName }} 
+              @if(room.players[1].id.value === game?.playerX?.id?.value) {
+                (X)
+              } @else if (room.players[1].id.value === game?.playerO?.id?.value) {
+                (O)
+              }
+            </h2>
+          } @else {
+            <h2>
+              Waiting...
+            </h2>
+          }
+        </section>
+
+      </div>
+
+
+      <footer class="game-room-footer">
+
+        <div class="players-indicator">
+
+          <span class="indicator-dot"></span>
+
+          {{ room.activePlayers }} / {{ room.maxPlayers }} players
+
+        </div>
+
+
+        <span class="game-status">
+
+          @switch (game?.status) {
+
+            @case ('WAITING') {
+              Waiting for players
+            }
+
+            @case ('PLAYING') {
+              Game in progress
+            }
+
+            @case ('DRAW') {
+              Draw
+            }
+
+            @case ('FINISHED') {
+              Game finished
+            }
+
+            @default {
+              Loading...
+            }
+
+          }
+
+        </span>
+
+
+        <button
+          class="quit-button"
+          (click)="leaveRoom()">
+
+          Leave room
+
+        </button>
+
+      </footer>
+
+    </div>
+
+  </div>
+
+}

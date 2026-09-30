@@ -7,13 +7,14 @@ import { GamesComponent } from './games/games.component';
 import { ShowcasesComponent } from './showcases/showcases.component';
 import { ProfileComponent } from './profile/profile.component';
 import { WebsiteComponent } from './website/website.component';
+import { gameGuard } from './_guard/game.guard';
 
 export const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'app1', component: FallingSand1Component, title: "Falling Sand"},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'games', component: GamesComponent},
+  {path: 'games', component: GamesComponent, canActivate: [gameGuard]},
   {path: 'showcases', component: ShowcasesComponent},
   {path: 'websites', component: WebsiteComponent},
   {path: 'profile', component: ProfileComponent},

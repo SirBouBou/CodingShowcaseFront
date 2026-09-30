@@ -1,0 +1,693 @@
+/* =========================================
+   GLOBAL
+   ========================================= */
+
+.games-page {
+  min-height: calc(100vh - 70px);
+
+  padding: 45px 40px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+   ========================================= */
+
+.games-container {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.games-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 30px 35px;
+
+  margin-bottom: 30px;
+
+  background: #ffffff;
+
+  border: 1px solid #dedede;
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+
+.games-title {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.game-type {
+  margin-bottom: 5px;
+
+  font-size: 0.68rem;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+
+  color: #999;
+}
+
+
+.games-title h1 {
+  margin: 0;
+
+  font-size: 1.8rem;
+  font-weight: 650;
+
+  color: #222;
+}
+
+
+.games-title p {
+  margin: 6px 0 0;
+
+  color: #888;
+
+  font-size: 0.9rem;
+}
+
+
+/* =========================================
+   CREATE BUTTON
+   ========================================= */
+
+.create-room-button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 11px 18px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: #222;
+  color: white;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+
+.create-room-button:hover {
+  background: #333;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+
+.create-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+
+/* =========================================
+   ROOMS SECTION
+   ========================================= */
+
+.rooms-section {
+  padding: 30px 35px;
+
+  background: #ffffff;
+
+  border: 1px solid #dedede;
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+
+.rooms-section-header {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 25px;
+
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid #e8e8e8;
+}
+
+
+.rooms-section-header h2 {
+  margin: 0;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+
+.rooms-section-header span {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 0.78rem;
+
+  color: #999;
+}
+
+
+/* =========================================
+   ROOMS GRID
+   ========================================= */
+
+.rooms-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 20px;
+}
+
+
+/* =========================================
+   ROOM CARD
+   ========================================= */
+
+.room-card {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 260px;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  background: #fafafa;
+
+  border: 1px solid #dedede;
+  border-radius: 15px;
+
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+
+.room-card:hover {
+  transform: translateY(-2px);
+
+  border-color: #c8c8c8;
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================
+   ROOM HEADER
+   ========================================= */
+
+.room-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  padding-bottom: 15px;
+
+  border-bottom: 1px solid #e5e5e5;
+}
+
+
+.room-identity {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.room-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  color: #999;
+}
+
+
+.room-id {
+  margin-top: 4px;
+
+  font-family: monospace;
+
+  font-size: 0.8rem;
+
+  color: #555;
+}
+
+
+/* =========================================
+   CAPACITY
+   ========================================= */
+
+.room-capacity {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 9px;
+
+  border-radius: 7px;
+
+  background: #eeeeee;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  color: #666;
+}
+
+
+.room-capacity.full {
+  background: #e7e7e7;
+
+  color: #888;
+}
+
+
+.capacity-icon {
+  font-size: 0.85rem;
+}
+
+
+/* =========================================
+   PLAYERS
+   ========================================= */
+
+.room-players {
+  flex: 1;
+
+  padding: 18px 0;
+}
+
+
+.section-label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-size: 0.63rem;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  color: #aaa;
+}
+
+
+.players-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+
+.player-row {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  min-height: 38px;
+}
+
+
+.player-avatar {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 9px;
+
+  background: #e4e4e4;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+
+  color: #555;
+}
+
+
+.player-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  color: #333;
+}
+
+
+.waiting-player .player-name {
+  color: #aaa;
+  font-style: italic;
+}
+
+
+.empty-avatar {
+  border: 1px dashed #cfcfcf;
+
+  background: transparent;
+
+  color: #aaa;
+}
+
+
+/* =========================================
+   ROOM FOOTER
+   ========================================= */
+
+.room-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-top: 15px;
+
+  border-top: 1px solid #e5e5e5;
+}
+
+
+.room-state {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  font-size: 0.72rem;
+
+  color: #888;
+}
+
+
+.state-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #45b36b;
+}
+
+
+.room-state.full .state-dot {
+  background: #aaa;
+}
+
+
+/* =========================================
+   JOIN BUTTON
+   ========================================= */
+
+.join-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 13px;
+
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+  background: #fff;
+
+  color: #333;
+
+  font-size: 0.78rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+
+.join-button:hover {
+  background: #f0f0f0;
+
+  border-color: #aaa;
+}
+
+
+.join-arrow {
+  font-size: 1rem;
+
+  transition: transform 0.15s ease;
+}
+
+
+.join-button:hover .join-arrow {
+  transform: translateX(3px);
+}
+
+
+.join-button.disabled {
+  cursor: not-allowed;
+
+  background: #eeeeee;
+
+  border-color: #ddd;
+
+  color: #aaa;
+}
+
+
+/* =========================================
+   EMPTY STATE
+   ========================================= */
+
+.empty-state {
+  min-height: 360px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #dedede;
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.06);
+
+  text-align: center;
+}
+
+
+.empty-icon {
+  width: 70px;
+  height: 70px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 20px;
+
+  border-radius: 18px;
+
+  background: #f0f0f0;
+
+  font-size: 2rem;
+}
+
+
+.empty-state h2 {
+  margin: 0 0 8px;
+
+  font-size: 1.2rem;
+}
+
+
+.empty-state p {
+  margin: 0 0 25px;
+
+  color: #888;
+
+  font-size: 0.85rem;
+}
+
+
+/* =========================================
+   GAME ROOM
+   ========================================= */
+
+.game-room {
+  min-height: calc(100vh - 70px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px;
+
+  box-sizing: border-box;
+}
+
+
+.game-room-card {
+  width: min(1100px, 100%);
+
+  background: #ffffff;
+
+  border: 1px solid #dedede;
+  border-radius: 20px;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   GAME HEADER
+   ========================================= */
+
+.game-room-header {
+  min-height: 80px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px 30px;
+
+  border-bottom: 1px solid #e5e5e5;
+
+  background: #fafafa;
+}
+
+
+.game-title {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+
+.game-title h1 {
+  margin: 0;
+
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+
+.room-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 800px) {
+
+  .games-page {
+    padding: 25px 20px;
+  }
+
+  .games-header {
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .rooms-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 550px) {
+
+  .games-page {
+    padding: 15px 10px;
+  }
+
+  .games-header {
+    flex-direction: column;
+    padding: 25px;
+  }
+
+  .create-room-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .rooms-section {
+    padding: 20px;
+  }
+
+  .room-card {
+    min-height: 250px;
+  }
+
+}
+
+.board-status {
+  text-align: center;
+  font-weight: 600;
+  padding: 8px 0;
+}
+
+.game-result {
+  font-size: 1.1rem;
+}
+
+.player-message.current-turn {
+  font-weight: 600;
+}
+
+.player-message.winner {
+  font-weight: 700;
+}

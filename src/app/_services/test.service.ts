@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { SKIP_401_REDIRECT } from '../_helpers/http.interceptor';
+import { SKIP_401_REDIRECT } from '../_context/auth-context';
 import { LoggerService } from './logger.service';
 
 

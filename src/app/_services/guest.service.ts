@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { StorageService } from './storage.service';
 import { Observable, tap } from 'rxjs';
 import { PlayerIdentity } from '../_models/player.model';
+import { SKIP_401_REDIRECT } from '../_context/auth-context';
 
 const AUTH_API = `${environment.apiUrl}/guest/`;
 
@@ -30,6 +31,10 @@ export class GuestService {
   getCurrentGuest(): Observable<PlayerIdentity> {
     return this.http.get<PlayerIdentity>(
       AUTH_API + 'me',
+      {
+        ...httpOptions,
+        context: new HttpContext().set(SKIP_401_REDIRECT, true)
+      }
     );
   }
 }

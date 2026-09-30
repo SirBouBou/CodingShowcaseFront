@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { SessionService } from '../_services/session.service';
 import { AsyncPipe } from '@angular/common';
 import { LoggerService } from '../_services/logger.service';
+import { IdentityService } from '../_services/identity.service';
 
 @Component({
     selector: 'app-header',
@@ -26,7 +27,8 @@ export class HeaderComponent implements OnInit {
 
     constructor(
         private readonly eventBusService: EventBusService,
-        private readonly sessionService: SessionService
+        private readonly sessionService: SessionService,
+        private readonly identityService: IdentityService
     ) 
     {}
     
@@ -34,18 +36,21 @@ export class HeaderComponent implements OnInit {
       this.eventBusSub = this.eventBusService.on('logout', () => {
         this.logout();
       });
-  }
+    }
     
 
     logout(): void {
-    this.sessionService.logout().subscribe({
-      next: res => {
-        this.router.navigate(['/login'], { replaceUrl: true });
-      },
-      error: err => {
-        this.logger.error('Logout failed', err);
-      }
-    });
-  }
+      this.sessionService.logout().subscribe({
+        next: res => {
+          this.router.navigate(['/'], { replaceUrl: true });
+        },
+        error: err => {
+          this.logger.error('Logout failed', err);
+        }
+      });
+    }
     
+    changeGuestName(): void {
+
+    }
 }
