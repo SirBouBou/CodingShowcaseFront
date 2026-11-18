@@ -18,7 +18,7 @@ export class DbGameService {
   private readonly http = inject(HttpClient);
   constructor() {}
 
-  getPage(page:number): Observable<Page<DBGameResponse>> {
-    return this.http.get<Page<DBGameResponse>>(AUTH_API + `getAll?page=${page}`);
+  getPage(page:number, size:number): Observable<Page<DBGameResponse>> {
+    return this.http.get<Page<DBGameResponse>>(AUTH_API + `getAll?page=${page}&size=${size}`);
   }
 }

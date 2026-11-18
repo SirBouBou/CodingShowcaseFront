@@ -263,19 +263,37 @@
 
 
           @if (room.players[0]) {
+
             <h2>
               {{ room.players[0].displayName }}
-              @if(room.players[0].id.value === game?.playerX?.id?.value) {
+
+              @if (room.players[0].id.value === game?.playerX?.id?.value) {
                 (X)
               } @else if (room.players[0].id.value === game?.playerO?.id?.value) {
                 (O)
               }
             </h2>
+
           } @else {
+
             <h2>
               Waiting...
             </h2>
+
           }
+
+          @if (game?.status === 'PLAYING' && room.players[0]?.id?.value === game?.currentPlayer?.id?.value) {
+            <span class="current-player-indicator">
+              Your turn
+            </span>
+          }
+
+          @if (game?.status === 'FINISHED' && room.players[0]?.id?.value === game?.winner?.id?.value) {
+            <span class="player-result">
+              🏆 Winner
+            </span>
+          }
+
         </section>
 
 
@@ -287,26 +305,36 @@
             <div class="board-header">
               <span>BOARD</span>
             </div>
+
             @if (game?.status === 'PLAYING') {
+
               <div class="board-status">
                 {{ game?.currentPlayer?.displayName }}'s turn
               </div>
+
             } @else if (game?.status === 'WAITING') {
+
               <div class="board-status">
                 Waiting for opponent
               </div>
+
             } @else if (game?.status === 'DRAW') {
+
               <div class="board-status game-result">
                 🤝 Draw
               </div>
+
             } @else if (game?.status === 'FINISHED') {
+
               <div class="board-status game-result">
                 🏆 {{ game?.winner?.displayName }} wins!
               </div>
+
             }
+
             <div
               #sketchContainer
-              id="canvas" width="300" height="300">
+              id="canvas">
             </div>
 
           </div>
@@ -338,24 +366,43 @@
 
 
           @if (room.players[1]) {
+
             <h2>
-              {{ room.players[1].displayName }} 
-              @if(room.players[1].id.value === game?.playerX?.id?.value) {
+              {{ room.players[1].displayName }}
+
+              @if (room.players[1].id.value === game?.playerX?.id?.value) {
                 (X)
               } @else if (room.players[1].id.value === game?.playerO?.id?.value) {
                 (O)
               }
             </h2>
+
           } @else {
+
             <h2>
               Waiting...
             </h2>
+
           }
+
+          @if (game?.status === 'PLAYING' && room.players[1]?.id!.value === game?.currentPlayer?.id!.value) {
+            <span class="current-player-indicator">
+              Your turn
+            </span>
+          }
+
+          @if (game?.status === 'FINISHED' && room.players[1]?.id!.value === game?.winner?.id!.value) {
+            <span class="player-result">
+              🏆 Winner
+            </span>
+          }
+
         </section>
 
       </div>
 
 
+      <!-- Actions below the three columns -->
       <footer class="game-room-footer">
 
         <div class="players-indicator">
@@ -396,13 +443,27 @@
         </span>
 
 
-        <button
-          class="quit-button"
-          (click)="leaveRoom()">
+        <div class="game-actions">
 
-          Leave room
+          <button
+            class="reload-button"
+            type="button"
+            (click)="reload()">
 
-        </button>
+            Reload
+
+          </button>
+
+          <button
+            class="quit-button"
+            type="button"
+            (click)="leaveRoom()">
+
+            Leave room
+
+          </button>
+
+        </div>
 
       </footer>
 

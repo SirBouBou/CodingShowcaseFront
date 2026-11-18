@@ -5,7 +5,15 @@
       <p>Game database</p>
     </div>
 
-    <span class="game-count">{{ games.length }} games</span>
+    <span class="game-count">{{ currentNumber }} / {{ maxGames }} games</span>
+    <div class="game-count">
+      <select [(ngModel)]="size" (ngModelChange)="pageSizeChange()">
+        <option [ngValue]="10">10</option>
+        <option [ngValue]="25">25</option>
+        <option [ngValue]="50">50</option>
+        <option [ngValue]="100">100</option>
+      </select>
+    </div>
   </div>
 
   <div class="table-wrapper">
@@ -83,6 +91,37 @@
         }
       </tbody>
     </table>
+  </div>
+  <div class="footer">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-end">
+        <li class="page-item" [ngClass]="{'disabled' : currentPage <= 0}">
+          <a class="page-link" (click)="getNewPage(currentPage-1)">Previous</a>
+        </li>
+
+        @if (currentPage > 1) {
+          <li class="page-item"><a class="page-link" (click)="getNewPage(0)">1</a></li>
+          <li class="page-item"><a class="page-link" (click)="validatePageNumber()">...</a></li>
+        }    
+        @if (currentPage > 0) {
+          <li class="page-item"><a class="page-link" (click)="getNewPage(currentPage-1)">{{ currentPage }}</a></li>
+        }   
+
+        <li class="page-item active"><a class="page-link" >{{ currentPage + 1}}</a></li>
+
+        @if(currentPage < maxPages - 1) {
+          <li class="page-item"><a class="page-link" (click)="getNewPage(currentPage+1)">{{ currentPage + 2}}</a></li>
+        }
+        @if(currentPage < maxPages - 2) {
+          <li class="page-item"><a class="page-link" (click)="validatePageNumber()">...</a></li>
+          <li class="page-item"><a class="page-link" (click)="getNewPage(maxPages - 1)">{{ maxPages }}</a></li>
+        }   
+
+        <li class="page-item" [ngClass]="{'disabled' : currentPage >= maxPages - 1 }">
+          <a class="page-link" (click)="getNewPage(currentPage+1)">Next</a>
+        </li>
+      </ul>
+    </nav>
   </div>
 
   @if (games.length === 0) {
