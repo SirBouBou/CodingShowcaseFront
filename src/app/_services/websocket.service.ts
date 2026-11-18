@@ -20,7 +20,7 @@ export class WebSocketService {
   private gameSubscription?: StompSubscription;
 
   private client = new Client({
-    brokerURL: 'ws://localhost:8080/ws',//TODO: Change for prod
+    brokerURL: `${location.protocol === 'https:' ? 'wss:' : 'ws:'}//${location.host}/ws`,
 
     reconnectDelay: 5000,
 
